@@ -8,6 +8,9 @@ const buttonBase =
   'inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-base font-black transition focus:outline-none focus:ring-4 focus:ring-cyan-300/30 sm:min-h-14 sm:px-8';
 
 const rotatingRoles = ['a Full-Stack Web Developer', 'a Video Editor'];
+const hexClip = {
+  clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
+};
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -44,9 +47,9 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen overflow-hidden bg-slate-50 px-4 pb-20 pt-24 text-slate-950 dark:bg-slate-950 dark:text-white sm:px-6 sm:pb-28 lg:px-8 lg:pt-28">
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,252,0.94),rgba(255,255,255,0.78)),url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22700%22 viewBox=%220 0 1200 700%22%3E%3Cg fill=%22none%22 font-family=%22monospace%22 font-size=%2234%22 font-weight=%22700%22 opacity=%220.28%22%3E%3Ctext x=%2280%22 y=%2280%22 fill=%22%239b1b5a%22%3E%26lt;/Header%26gt;%3C/text%3E%3Ctext x=%22260%22 y=%22160%22 fill=%22%2306b6d4%22%3Econst portfolio = true;%3C/text%3E%3Ctext x=%2230%22 y=%22250%22 fill=%22%239b1b5a%22%3E%26lt;main className=%22hero%22%26gt;%3C/text%3E%3Ctext x=%22440%22 y=%22340%22 fill=%22%2306b6d4%22%3Edisplay: flex;%3C/text%3E%3Ctext x=%22240%22 y=%22480%22 fill=%22%239b1b5a%22%3ElinearGradient id=%22gold%22%3C/text%3E%3Ctext x=%22560%22 y=%22590%22 fill=%22%2306b6d4%22%3Ebuild(realWorldSolutions)%3C/text%3E%3C/g%3E%3C/svg%3E')] dark:bg-[linear-gradient(90deg,rgba(15,23,42,0.95),rgba(15,23,42,0.82)),url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22700%22 viewBox=%220 0 1200 700%22%3E%3Cg fill=%22none%22 font-family=%22monospace%22 font-size=%2234%22 font-weight=%22700%22 opacity=%220.28%22%3E%3Ctext x=%2280%22 y=%2280%22 fill=%22%239b1b5a%22%3E%26lt;/Header%26gt;%3C/text%3E%3Ctext x=%22260%22 y=%22160%22 fill=%22%2306b6d4%22%3Econst portfolio = true;%3C/text%3E%3Ctext x=%2230%22 y=%22250%22 fill=%22%239b1b5a%22%3E%26lt;main className=%22hero%22%26gt;%3C/text%3E%3Ctext x=%22440%22 y=%22340%22 fill=%22%2306b6d4%22%3Edisplay: flex;%3C/text%3E%3Ctext x=%22240%22 y=%22480%22 fill=%22%239b1b5a%22%3ElinearGradient id=%22gold%22%3C/text%3E%3Ctext x=%22560%22 y=%22590%22 fill=%22%2306b6d4%22%3Ebuild(realWorldSolutions)%3C/text%3E%3C/g%3E%3C/svg%3E')]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_36%,rgba(6,182,212,0.22),transparent_22%),radial-gradient(circle_at_16%_30%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0),rgba(241,245,249,0.96))] dark:bg-[radial-gradient(circle_at_78%_36%,rgba(6,182,212,0.18),transparent_22%),radial-gradient(circle_at_16%_30%,rgba(16,185,129,0.16),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0),rgba(15,23,42,0.9))]" />
-      <div className="absolute left-[18%] top-20 h-2 w-2 rounded-full bg-cyan-400" />
-      <div className="absolute left-[48%] top-28 h-4 w-4 rounded-full border-2 border-cyan-300" />
-      <div className="absolute right-[10%] top-56 h-2 w-2 rounded-full bg-cyan-500/70" />
+      <div className="absolute left-[18%] top-20 h-2 w-2 rotate-45 bg-cyan-400" />
+      <div className="absolute left-[48%] top-28 h-4 w-4 rotate-45 border-2 border-cyan-300" />
+      <div className="absolute right-[10%] top-56 h-2 w-2 rotate-45 bg-cyan-500/70" />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-9 sm:gap-10 lg:grid-cols-[1.12fr_0.88fr]">
         <motion.div
@@ -79,12 +82,18 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.75, delay: 0.1 }}
         >
-          <div className="relative grid aspect-square w-60 place-items-center rounded-full border-[5px] border-cyan-400 bg-white p-2 shadow-[0_0_38px_rgba(6,182,212,0.4)] transition duration-500 ease-out hover:scale-105 hover:rotate-2 sm:w-72 sm:border-[6px] sm:shadow-[0_0_42px_rgba(6,182,212,0.42)] lg:w-80">
-            <img
-              src={heroImage}
-              alt={`${profile.name} hero portrait`}
-              className="h-full w-full rounded-full object-cover object-center"
-            />
+          <div
+            className="relative grid aspect-square w-60 place-items-center bg-cyan-400 p-[6px] shadow-[0_0_38px_rgba(6,182,212,0.42)] transition duration-500 ease-out hover:scale-105 hover:rotate-2 sm:w-72 sm:p-2 sm:shadow-[0_0_42px_rgba(6,182,212,0.45)] lg:w-80"
+            style={hexClip}
+          >
+            <div className="grid h-full w-full place-items-center bg-white p-[7px]" style={hexClip}>
+              <img
+                src={heroImage}
+                alt={`${profile.name} hero portrait`}
+                className="h-full w-full object-cover object-center"
+                style={hexClip}
+              />
+            </div>
           </div>
         </motion.div>
       </div>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Hexagon profile picture frame</title>
+  <desc id="desc">A dark profile avatar placeholder with a glowing cyan hexagon frame, without any circular crop.</desc>
+  <defs>
+    <clipPath id="hexClip">
+      <path d="M256 30 L424 128 L424 322 L256 420 L88 322 L88 128 Z"/>
+    </clipPath>
+    <filter id="cyanGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-color="#19f7ff" flood-opacity=".8"/>
+      <feComposite in2="blur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="suit" x1="150" y1="160" x2="360" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#13364b"/>
+      <stop offset=".58" stop-color="#07121f"/>
+      <stop offset="1" stop-color="#020713"/>
+    </linearGradient>
+    <radialGradient id="face" cx="242" cy="142" r="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d9a387"/>
+      <stop offset=".55" stop-color="#8f5f55"/>
+      <stop offset="1" stop-color="#32252b"/>
+    </radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512">
+      <stop offset="0" stop-color="#343b47"/>
+      <stop offset="1" stop-color="#262d39"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <g clip-path="url(#hexClip)">
+    <rect x="70" y="28" width="372" height="400" fill="#222a35"/>
+    <path d="M168 112 C168 58 207 16 256 16 C305 16 344 58 344 112 C344 166 305 208 256 208 C207 208 168 166 168 112 Z" fill="#151b25" opacity=".45"/>
+
+    <path d="M154 436 C160 328 186 258 224 240 L286 240 C330 260 356 330 364 436 Z" fill="url(#suit)"/>
+    <path d="M190 436 C192 347 205 294 229 254 L249 344 L229 436 Z" fill="#06111e"/>
+    <path d="M321 436 L281 344 L303 255 C336 296 351 348 364 436 Z" fill="#040b15"/>
+    <path d="M232 241 L256 344 L284 241 C270 254 244 254 232 241 Z" fill="#111b29"/>
+    <path d="M240 248 L256 342 L274 248 L260 236 Z" fill="#d4d9df" opacity=".85"/>
+
+    <path d="M204 76 C216 35 292 30 314 69 C335 109 321 186 289 216 C265 239 223 227 204 194 C184 158 184 112 204 76 Z" fill="url(#face)"/>
+    <path d="M195 92 C212 38 286 28 321 76 C300 61 265 64 236 74 C218 80 207 87 195 92 Z" fill="#111722"/>
+    <path d="M284 72 C311 79 326 104 330 133 C339 100 324 71 294 54 Z" fill="#151b25"/>
+
+    <path d="M222 151 C237 145 251 146 266 153" fill="none" stroke="#2c2021" stroke-width="4" stroke-linecap="round"/>
+    <path d="M246 172 C255 179 268 178 279 172" fill="none" stroke="#302021" stroke-width="4" stroke-linecap="round"/>
+    <path d="M224 125 C235 118 248 119 258 124" fill="none" stroke="#18161b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M278 123 C290 117 304 118 315 125" fill="none" stroke="#18161b" stroke-width="5" stroke-linecap="round"/>
+    <path d="M238 139 C238 135 240 132 243 132 C246 132 248 135 248 139 C248 143 246 146 243 146 C240 146 238 143 238 139 Z" fill="#121923"/>
+    <path d="M289 139 C289 135 291 132 294 132 C297 132 299 135 299 139 C299 143 297 146 294 146 C291 146 289 143 289 139 Z" fill="#121923"/>
+
+    <path d="M262 182 C247 178 233 184 220 199 C238 213 268 219 288 205 C282 194 273 186 262 182 Z" fill="#8d625a"/>
+    <path d="M218 202 C244 220 278 222 302 199" fill="none" stroke="#0c111a" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+
+    <path d="M276 226 C303 230 314 260 303 285 C291 311 259 304 252 279 C245 254 252 224 276 226 Z" fill="#b98372"/>
+    <path d="M298 259 C318 246 338 260 333 285 C327 316 293 315 283 290 Z" fill="#b98372"/>
+    <path d="M305 296 L331 307" stroke="#1a1d25" stroke-width="10" stroke-linecap="round"/>
+    <path d="M321 314 C321 302 330 294 341 294 C352 294 361 302 361 314 C361 326 352 334 341 334 C330 334 321 326 321 314 Z" fill="#172233" stroke="#d8e7ee" stroke-width="5"/>
+    <path d="M329 314 C329 307 334 302 341 302 C348 302 353 307 353 314 C353 321 348 326 341 326 C334 326 329 321 329 314 Z" fill="#26d9df" opacity=".35"/>
+    <path d="M340 303 L344 316 L335 323" fill="none" stroke="#d8e7ee" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <path d="M256 30 L424 128 L424 322 L256 420 L88 322 L88 128 Z"
+        fill="none" stroke="#18f7ff" stroke-width="12" stroke-linejoin="round" filter="url(#cyanGlow)"/>
+</svg>
