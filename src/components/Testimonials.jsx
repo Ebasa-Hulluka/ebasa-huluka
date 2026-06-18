@@ -2,14 +2,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { testimonials } from '../data/portfolio';
+import { AnimatedLineBackground, FloatingElements } from './AnimatedBackground';
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="bg-slate-50 px-4 py-12 dark:bg-slate-900/45 sm:px-6 sm:py-20 lg:px-8">
-      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+    <section id="testimonials" className="section-surface px-4 py-12 text-slate-950 dark:text-slate-100 sm:px-6 sm:py-20 lg:px-8">
+      <AnimatedLineBackground colorScheme="purple-cyan" />
+      <FloatingElements />
+
+      <div className="relative mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
         <div className="mx-auto mb-8 max-w-4xl text-center sm:mb-14">
-          <h2 className="text-3xl font-black text-slate-800 dark:text-white sm:text-5xl">Testimonials</h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-cyan-400 sm:mt-4 sm:w-20" />
+          <h2 className="bg-gradient-to-r from-purple-600 via-cyan-500 to-emerald-600 bg-clip-text text-3xl font-black text-transparent dark:from-purple-400 dark:via-cyan-300 dark:to-emerald-300 sm:text-5xl">Testimonials</h2>
+          <div className="mx-auto mt-3 h-1.5 w-20 rounded-full bg-gradient-to-r from-purple-500 via-cyan-400 to-emerald-400 sm:mt-4 sm:w-24" />
           <p className="mx-auto mt-4 max-w-3xl text-sm font-medium leading-6 text-slate-700 dark:text-slate-300 sm:mt-7 sm:text-lg sm:leading-8">
             Feedback focused on clear communication, polished delivery, and dependable results.
           </p>
@@ -18,7 +22,7 @@ export default function Testimonials() {
           {testimonials.map((testimonial, index) => (
             <motion.figure
               key={testimonial.name}
-              className="group relative overflow-hidden rounded-lg border border-slate-200 bg-white p-4 shadow-premium transition duration-300 hover:-translate-y-2 hover:border-cyan-300 hover:shadow-[0_24px_70px_rgba(6,182,212,0.16)] dark:border-white/10 dark:bg-white/[0.06] dark:hover:border-cyan-300/60 sm:rounded-2xl sm:p-7"
+              className="group relative overflow-hidden rounded-lg border border-indigo-200/80 bg-white/90 p-4 shadow-[0_18px_50px_rgba(8,145,178,0.14)] transition duration-300 hover:-translate-y-2 hover:border-cyan-300 hover:shadow-[0_24px_70px_rgba(6,182,212,0.16)] dark:border-white/10 dark:bg-white/[0.07] dark:hover:border-cyan-300/60 sm:rounded-2xl sm:p-7"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}

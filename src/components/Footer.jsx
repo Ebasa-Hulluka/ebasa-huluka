@@ -4,9 +4,9 @@ import { profile, navItems } from '../data/portfolio';
 
 export default function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-gradient-to-br from-white via-slate-50 to-cyan-50/30 px-4 py-12 text-slate-950 dark:border-white/10 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-white sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-        <div className="grid gap-8 rounded-2xl border border-cyan-100 bg-white p-6 shadow-[0_18px_50px_rgba(8,145,178,0.10)] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[0_24px_70px_rgba(0,0,0,0.18)] md:grid-cols-[1fr_auto] md:items-center">
+    <footer className="section-surface border-t border-cyan-700/20 px-4 py-12 text-slate-950 dark:border-cyan-300/15 dark:text-slate-100 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+        <div className="grid gap-8 rounded-2xl border border-indigo-200/80 bg-white/90 p-6 shadow-[0_18px_50px_rgba(8,145,178,0.14)] dark:border-white/10 dark:bg-white/[0.06] dark:shadow-[0_24px_70px_rgba(0,0,0,0.18)] md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <a href="#home" className="inline-flex items-baseline text-2xl font-black tracking-tight text-slate-950 dark:text-white">
               E<span className="text-cyan-400">ba</span>

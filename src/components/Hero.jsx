@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { FiArrowDownRight } from 'react-icons/fi';
 import { profile } from '../data/portfolio';
 import heroImage from '../assets/6050933463902261025.jpg';
@@ -8,14 +8,51 @@ const buttonBase =
   'inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-base font-black transition focus:outline-none focus:ring-4 focus:ring-cyan-300/30 sm:min-h-14 sm:px-8';
 
 const rotatingRoles = ['a Full-Stack Web Developer', 'a Video Editor'];
-const hexClip = {
-  clipPath: 'polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)',
-};
+
+// Animated Line Background Component
+const AnimatedLineBackground = () => (
+  <>
+    <div className="absolute inset-0 overflow-hidden">
+      {/* Animated horizontal lines */}
+      <div className="absolute inset-0 opacity-20 dark:opacity-35">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={`h-line-${i}`}
+            className="absolute h-px w-full bg-gradient-to-r from-transparent via-purple-600 dark:via-sky-400 to-transparent"
+            style={{ top: `${i * 5}%` }}
+            animate={{ x: ['-100%', '100%'] }}
+            transition={{ duration: 15 + i, repeat: Infinity, ease: 'linear' }}
+          />
+        ))}
+      </div>
+      {/* Animated vertical lines */}
+      <div className="absolute inset-0 opacity-20 dark:opacity-35">
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`v-line-${i}`}
+            className="absolute w-px h-full bg-gradient-to-b from-transparent via-cyan-500 dark:via-violet-400 to-transparent"
+            style={{ left: `${i * 7}%` }}
+            animate={{ y: ['100%', '-100%'] }}
+            transition={{ duration: 20 + i, repeat: Infinity, ease: 'linear' }}
+          />
+        ))}
+      </div>
+    </div>
+
+    {/* Gradient overlays */}
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(168,85,247,0.16),transparent_28%),radial-gradient(circle_at_78%_24%,rgba(14,165,233,0.18),transparent_30%),radial-gradient(circle_at_50%_88%,rgba(45,212,191,0.12),transparent_34%)] dark:bg-[radial-gradient(circle_at_18%_18%,rgba(168,85,247,0.28),transparent_30%),radial-gradient(circle_at_78%_24%,rgba(14,165,233,0.24),transparent_30%),radial-gradient(circle_at_50%_88%,rgba(45,212,191,0.18),transparent_34%)]" />
+    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white/30 dark:via-[#0b1224]/40 dark:to-[#060a16]/85" />
+    <div className="absolute inset-0 bg-gradient-to-r from-purple-100/8 via-transparent to-cyan-100/8 dark:from-cyan-950/30 dark:via-transparent dark:to-violet-950/30" />
+  </>
+);
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedRole, setTypedRole] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
+  const { scrollY } = useScroll();
+  const yTransform = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacityTransform = useTransform(scrollY, [0, 400], [1, 0.2]);
 
   useEffect(() => {
     const currentRole = rotatingRoles[roleIndex];
@@ -44,59 +81,141 @@ export default function Hero() {
   }, [isDeleting, roleIndex, typedRole]);
 
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-slate-50 px-4 pb-20 pt-24 text-slate-950 dark:bg-slate-950 dark:text-white sm:px-6 sm:pb-28 lg:px-8 lg:pt-28">
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(248,250,252,0.94),rgba(255,255,255,0.78)),url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22700%22 viewBox=%220 0 1200 700%22%3E%3Cg fill=%22none%22 font-family=%22monospace%22 font-size=%2234%22 font-weight=%22700%22 opacity=%220.28%22%3E%3Ctext x=%2280%22 y=%2280%22 fill=%22%239b1b5a%22%3E%26lt;/Header%26gt;%3C/text%3E%3Ctext x=%22260%22 y=%22160%22 fill=%22%2306b6d4%22%3Econst portfolio = true;%3C/text%3E%3Ctext x=%2230%22 y=%22250%22 fill=%22%239b1b5a%22%3E%26lt;main className=%22hero%22%26gt;%3C/text%3E%3Ctext x=%22440%22 y=%22340%22 fill=%22%2306b6d4%22%3Edisplay: flex;%3C/text%3E%3Ctext x=%22240%22 y=%22480%22 fill=%22%239b1b5a%22%3ElinearGradient id=%22gold%22%3C/text%3E%3Ctext x=%22560%22 y=%22590%22 fill=%22%2306b6d4%22%3Ebuild(realWorldSolutions)%3C/text%3E%3C/g%3E%3C/svg%3E')] dark:bg-[linear-gradient(90deg,rgba(15,23,42,0.95),rgba(15,23,42,0.82)),url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%221200%22 height=%22700%22 viewBox=%220 0 1200 700%22%3E%3Cg fill=%22none%22 font-family=%22monospace%22 font-size=%2234%22 font-weight=%22700%22 opacity=%220.28%22%3E%3Ctext x=%2280%22 y=%2280%22 fill=%22%239b1b5a%22%3E%26lt;/Header%26gt;%3C/text%3E%3Ctext x=%22260%22 y=%22160%22 fill=%22%2306b6d4%22%3Econst portfolio = true;%3C/text%3E%3Ctext x=%2230%22 y=%22250%22 fill=%22%239b1b5a%22%3E%26lt;main className=%22hero%22%26gt;%3C/text%3E%3Ctext x=%22440%22 y=%22340%22 fill=%22%2306b6d4%22%3Edisplay: flex;%3C/text%3E%3Ctext x=%22240%22 y=%22480%22 fill=%22%239b1b5a%22%3ElinearGradient id=%22gold%22%3C/text%3E%3Ctext x=%22560%22 y=%22590%22 fill=%22%2306b6d4%22%3Ebuild(realWorldSolutions)%3C/text%3E%3C/g%3E%3C/svg%3E')]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_36%,rgba(6,182,212,0.22),transparent_22%),radial-gradient(circle_at_16%_30%,rgba(16,185,129,0.15),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0),rgba(241,245,249,0.96))] dark:bg-[radial-gradient(circle_at_78%_36%,rgba(6,182,212,0.18),transparent_22%),radial-gradient(circle_at_16%_30%,rgba(16,185,129,0.16),transparent_28%),linear-gradient(180deg,rgba(2,6,23,0),rgba(15,23,42,0.9))]" />
-      <div className="absolute left-[18%] top-20 h-2 w-2 rotate-45 bg-cyan-400" />
-      <div className="absolute left-[48%] top-28 h-4 w-4 rotate-45 border-2 border-cyan-300" />
-      <div className="absolute right-[10%] top-56 h-2 w-2 rotate-45 bg-cyan-500/70" />
+    <section id="home" className="section-surface min-h-screen px-4 pb-20 pt-24 text-slate-950 dark:text-slate-100 sm:px-6 sm:pb-28 lg:px-8 lg:pt-28">
+      {/* Animated Line Background */}
+      <AnimatedLineBackground />
+
+      {/* Floating Elements */}
+      <motion.div
+        className="absolute left-[8%] top-20 h-3 w-3 rotate-45 rounded-sm bg-gradient-to-r from-purple-400 to-cyan-400 shadow-[0_0_24px_rgba(34,211,238,0.35)]"
+        animate={{ y: [0, -20, 0], rotate: [45, 90, 45] }}
+        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute left-[12%] top-40 h-6 w-6 rotate-45 border-2 border-gradient-to-r from-cyan-300 to-purple-400"
+        animate={{ y: [0, 30, 0], rotate: [45, -45, 45] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute right-[10%] top-56 h-4 w-4 rotate-45 bg-gradient-to-br from-cyan-400 to-violet-500 shadow-[0_0_26px_rgba(139,92,246,0.45)]"
+        animate={{ y: [0, -25, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div
+        className="absolute right-[5%] bottom-40 h-3 w-3 rounded-full bg-teal-300 shadow-[0_0_24px_rgba(45,212,191,0.45)]"
+        animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 4, repeat: Infinity }}
+      />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-9 sm:gap-10 lg:grid-cols-[1.12fr_0.88fr]">
         <motion.div
+          style={{ y: yTransform, opacity: opacityTransform }}
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="max-w-4xl text-[2.85rem] font-black leading-[1.06] text-slate-950 dark:text-white min-[380px]:text-5xl sm:text-6xl lg:text-7xl">
-            Welcome To <span className="text-cyan-400">My</span>
-            <span className="block text-cyan-500 dark:text-cyan-300">Portfolio!</span>
-          </h1>
-          <p className="mt-7 grid min-h-[5rem] max-w-3xl content-start text-xl font-semibold leading-8 text-slate-800 dark:text-white/90 sm:mt-9 sm:min-h-[4.75rem] sm:text-3xl lg:block lg:min-h-0">
-            <span className="block lg:inline">I am {profile.name.trim()},</span>
-            <span className="typing-role-dynamic block min-h-8 text-cyan-500 dark:text-cyan-300 sm:min-h-10 lg:inline">
-              {typedRole || '\u00a0'}
-            </span>
-          </p>
+          <motion.h1 
+            className="max-w-4xl text-[2.85rem] font-black leading-[1.06] text-slate-900 dark:text-slate-100 min-[380px]:text-5xl sm:text-6xl lg:text-7xl"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            Welcome To <span className="bg-gradient-to-r from-purple-600 via-cyan-500 to-purple-600 bg-clip-text text-transparent dark:from-teal-300 dark:via-sky-300 dark:to-violet-300">My</span>
+            <motion.span 
+              className="block bg-gradient-to-r from-cyan-500 via-purple-600 to-cyan-500 bg-clip-text text-transparent dark:from-sky-300 dark:via-violet-300 dark:to-teal-200"
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            >
+              Portfolio!
+            </motion.span>
+          </motion.h1>
 
-          <div className="mt-8 flex flex-col gap-3.5 sm:mt-9 sm:flex-row sm:gap-4">
-            <a href="#contact" className={`${buttonBase} bg-cyan-400 text-slate-950 shadow-[0_16px_36px_rgba(6,182,212,0.25)] hover:-translate-y-1 hover:bg-cyan-300`}>
+          <motion.p 
+            className="mt-7 grid min-h-[5rem] max-w-3xl content-start text-xl font-semibold leading-8 text-slate-600 dark:text-slate-300 sm:mt-9 sm:min-h-[4.75rem] sm:text-3xl lg:block lg:min-h-0"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="block lg:inline">I am <span className="bg-gradient-to-r from-purple-700 to-cyan-600 bg-clip-text font-bold text-transparent dark:from-violet-300 dark:to-teal-200">{profile.name.trim()}</span>,</span>
+            <motion.span 
+              className="typing-role-dynamic block min-h-8 bg-gradient-to-r from-cyan-600 via-purple-700 to-cyan-600 bg-clip-text font-bold text-transparent dark:from-sky-300 dark:via-violet-300 dark:to-teal-200 sm:min-h-10 lg:inline"
+              animate={{ opacity: [1, 0.7, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              {typedRole || '\u00a0'}
+            </motion.span>
+          </motion.p>
+
+          <motion.div 
+            className="mt-8 flex flex-col gap-3.5 sm:mt-9 sm:flex-row sm:gap-4"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.a 
+              href="#contact" 
+              className={`${buttonBase} bg-gradient-to-r from-purple-500 to-cyan-400 text-white shadow-[0_16px_36px_rgba(168,85,247,0.3)] hover:shadow-[0_20px_48px_rgba(168,85,247,0.4)] dark:from-cyan-400 dark:via-sky-400 dark:to-violet-400 dark:text-slate-950 dark:shadow-[0_18px_44px_rgba(14,165,233,0.25)] dark:hover:shadow-[0_24px_58px_rgba(45,212,191,0.28)]`}
+              whileHover={{ scale: 1.05, y: -4 }}
+              whileTap={{ scale: 0.95 }}
+            >
               Hire Me <FiArrowDownRight />
-            </a>
-            <a href="#projects" className={`${buttonBase} border-2 border-cyan-400 bg-white/50 text-slate-950 hover:-translate-y-1 hover:bg-cyan-400 dark:bg-transparent dark:text-cyan-300 dark:hover:text-slate-950`}>
+            </motion.a>
+            <motion.a 
+              href="#projects" 
+              className={`${buttonBase} border-2 border-purple-500 bg-white/50 text-slate-950 hover:bg-purple-500/20 dark:border-sky-300/70 dark:bg-slate-900/45 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] dark:hover:border-teal-200 dark:hover:bg-sky-300/10 dark:hover:text-teal-100`}
+              whileHover={{ scale: 1.05, y: -4 }}
+              whileTap={{ scale: 0.95 }}
+            >
               View Projects
-            </a>
-          </div>
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         <motion.div
           className="relative mx-auto grid w-full max-w-lg place-items-center"
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.75, delay: 0.1 }}
+          initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          style={{ y: useTransform(scrollY, [0, 300], [0, 80]) }}
         >
-          <div
-            className="relative grid aspect-square w-60 place-items-center bg-cyan-400 p-[6px] shadow-[0_0_38px_rgba(6,182,212,0.42)] transition duration-500 ease-out hover:scale-105 hover:rotate-2 sm:w-72 sm:p-2 sm:shadow-[0_0_42px_rgba(6,182,212,0.45)] lg:w-80"
-            style={hexClip}
+          {/* Gradient Border Rectangle */}
+          <motion.div
+            className="relative h-80 w-56 overflow-hidden rounded-2xl bg-gradient-to-br from-violet-500 via-cyan-300 to-teal-300 p-1 shadow-2xl sm:h-96 sm:w-64 lg:h-[28rem] lg:w-72"
+            animate={{ 
+              boxShadow: [
+                '0 0 42px rgba(14, 165, 233, 0.34)',
+                '0 0 66px rgba(45, 212, 191, 0.42)',
+                '0 0 42px rgba(139, 92, 246, 0.34)',
+              ]
+            }}
+            transition={{ duration: 4, repeat: Infinity }}
           >
-            <div className="grid h-full w-full place-items-center bg-white p-[7px]" style={hexClip}>
-              <img
+            {/* Inner white background */}
+            <div className="group relative h-full w-full overflow-hidden rounded-xl bg-white dark:bg-[#080d1a]">
+              <motion.img
                 src={heroImage}
                 alt={`${profile.name} hero portrait`}
-                className="h-full w-full object-cover object-center"
-                style={hexClip}
+                className="h-full w-full object-cover object-center transition-transform duration-500 dark:brightness-105 dark:contrast-105"
+                whileHover={{ scale: 1.08 }}
+              />
+              {/* Overlay on hover */}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-t from-sky-500/35 via-transparent to-teal-300/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
               />
             </div>
-          </div>
+          </motion.div>
+
+          {/* Floating decorative elements around image */}
+          <motion.div
+            className="absolute -right-6 -top-6 h-20 w-20 rounded-lg border-2 border-violet-300/60 opacity-60"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+          />
+          <motion.div
+            className="absolute -bottom-8 -left-8 h-24 w-24 rounded-full border-2 border-teal-300/60 opacity-50"
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
         </motion.div>
       </div>
     </section>

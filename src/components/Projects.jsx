@@ -1,28 +1,56 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { FaGithub } from 'react-icons/fa';
 import { FiArrowUpRight } from 'react-icons/fi';
 import { projects } from '../data/portfolio';
+import { AnimatedLineBackground, FloatingElements } from './AnimatedBackground';
 
 export default function Projects() {
+  const { scrollY } = useScroll();
+  const yTransform = useTransform(scrollY, [1500, 2000], [0, 100]);
+
   return (
     <section
       id="projects"
-      className="bg-gradient-to-br from-white via-slate-50 to-cyan-50/30 px-4 py-12 text-slate-950 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-white sm:px-6 sm:py-20 lg:px-8"
+      className="section-surface px-4 py-12 text-slate-950 dark:text-slate-100 sm:px-6 sm:py-32 lg:px-8"
     >
-      <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
-        <div className="mx-auto mb-8 max-w-4xl text-center sm:mb-14">
-          <h2 className="text-3xl font-black text-slate-800 dark:text-white sm:text-5xl">Projects</h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-cyan-400 sm:mt-4 sm:w-20" />
-          <p className="mx-auto mt-4 max-w-3xl text-sm font-medium leading-6 text-slate-700 dark:text-slate-300 sm:mt-7 sm:text-lg sm:leading-8">
+      <AnimatedLineBackground colorScheme="purple-cyan" />
+      <FloatingElements />
+
+      <div className="relative mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+        <motion.div 
+          className="mx-auto mb-8 max-w-4xl text-center sm:mb-14"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.h2 
+            className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-cyan-500 to-purple-600 dark:from-purple-400 dark:via-cyan-300 dark:to-purple-400 sm:text-5xl"
+            animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            Projects
+          </motion.h2>
+          <motion.div 
+            className="mx-auto mt-3 h-1.5 w-20 rounded-full bg-gradient-to-r from-purple-500 to-cyan-400 sm:mt-4 sm:w-24"
+            animate={{ scaleX: [0.8, 1, 0.8] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          />
+          <motion.p 
+            className="mx-auto mt-4 max-w-3xl text-sm font-medium leading-6 text-slate-700 dark:text-slate-300 sm:mt-7 sm:text-lg sm:leading-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
             Real full-stack projects built with practical features, clean interfaces, and production-focused workflows.
-          </p>
-        </div>
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+          </motion.p>
+        </motion.div>
+        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3" style={{ y: yTransform }}>
           {projects.map((project, index) => (
             <motion.article
               key={project.title}
-              className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_18px_50px_rgba(15,23,42,0.10)] transition duration-300 hover:-translate-y-2 hover:border-cyan-200 hover:shadow-[0_24px_70px_rgba(8,145,178,0.16)] dark:border-white/10 dark:bg-slate-950/70 dark:hover:border-cyan-300/40"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border-2 border-indigo-300/55 bg-white/85 shadow-[0_18px_50px_rgba(8,145,178,0.14)] backdrop-blur-sm transition duration-300 hover:border-indigo-500/60 hover:shadow-[0_24px_70px_rgba(79,70,229,0.22)] dark:border-cyan-400/20 dark:bg-slate-900/45 dark:hover:border-cyan-300/60"
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -36,37 +64,49 @@ export default function Projects() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/10 to-transparent opacity-80" />
-                <a
+                <motion.a
                   href={project.github}
                   aria-label={`Open ${project.title} on GitHub`}
-                  className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-slate-950/80 text-lg text-white shadow-lg backdrop-blur transition hover:-translate-y-0.5 hover:bg-white hover:text-slate-950 sm:right-4 sm:top-4 sm:h-11 sm:w-11 sm:text-xl"
+                  className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full border border-white/20 bg-gradient-to-br from-purple-500 to-cyan-400 text-lg text-white shadow-lg backdrop-blur transition sm:right-4 sm:top-4 sm:h-11 sm:w-11 sm:text-xl"
+                  whileHover={{ scale: 1.15, rotate: 10 }}
+                  whileTap={{ scale: 0.9 }}
                 >
                   <FaGithub />
-                </a>
+                </motion.a>
               </div>
               <div className="flex flex-1 flex-col p-4 sm:p-6">
-                <h3 className="text-base font-black leading-snug text-slate-950 dark:text-white sm:text-xl">{project.title}</h3>
+                <h3 className="text-base font-black leading-snug text-transparent bg-clip-text bg-gradient-to-r from-slate-950 to-slate-700 dark:from-white dark:to-slate-300 sm:text-xl">
+                  {project.title}
+                </h3>
                 <p className="mt-2 text-xs leading-6 text-slate-600 dark:text-slate-300 sm:mt-3 sm:min-h-40 sm:text-sm sm:leading-7">
                   {project.description}
                 </p>
                 <div className="mt-4 flex flex-wrap gap-1.5 sm:mt-5 sm:gap-2">
                   {project.stack.map((tech) => (
-                    <span
+                    <motion.span
                       key={tech}
-                      className="rounded-md bg-slate-100 px-2 py-1.5 text-[0.68rem] font-bold text-slate-700 transition group-hover:bg-cyan-50 group-hover:text-cyan-700 dark:bg-white/10 dark:text-slate-200 dark:group-hover:bg-cyan-300/10 dark:group-hover:text-cyan-200 sm:rounded-lg sm:px-3 sm:py-2 sm:text-xs"
+                      className="rounded-lg bg-gradient-to-r from-purple-100 to-cyan-100 dark:from-purple-900/40 dark:to-cyan-900/40 px-3 py-1.5 text-xs font-bold text-purple-700 dark:text-purple-200 transition sm:text-sm"
+                      whileHover={{ scale: 1.05 }}
                     >
                       {tech}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-                <div className="mt-auto pt-4 sm:pt-6">
-                  <a
+                <motion.div 
+                  className="mt-auto pt-4 sm:pt-6"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <motion.a
                     href={project.github}
-                    className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 text-xs font-extrabold text-slate-700 transition hover:border-slate-950 hover:bg-slate-950 hover:text-white dark:border-white/10 dark:text-white dark:hover:bg-white dark:hover:text-slate-950 sm:min-h-11 sm:px-4 sm:text-sm"
+                    className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border-2 border-purple-500/40 bg-gradient-to-r from-purple-500/10 to-cyan-400/10 px-3 text-xs font-extrabold text-slate-700 dark:text-white transition hover:border-purple-500 hover:bg-gradient-to-r hover:from-purple-500 hover:to-cyan-400 hover:text-white dark:hover:text-slate-950 sm:min-h-11 sm:px-4 sm:text-sm"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <FaGithub /> GitHub <FiArrowUpRight />
-                  </a>
-                </div>
+                  </motion.a>
+                </motion.div>
               </div>
             </motion.article>
           ))}
