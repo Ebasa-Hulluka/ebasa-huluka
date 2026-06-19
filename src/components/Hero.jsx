@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { FiArrowDownRight } from 'react-icons/fi';
 import { profile } from '../data/portfolio';
 import heroImage from '../assets/optimized/hero-portrait.jpg';
 
 const buttonBase =
-  'inline-flex min-h-13 items-center justify-center gap-2 rounded-full px-7 text-base font-black transition focus:outline-none focus:ring-4 focus:ring-cyan-300/30 sm:min-h-14 sm:px-8';
+  'inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-3 text-sm font-black transition focus:outline-none focus:ring-4 focus:ring-cyan-300/30 min-[380px]:px-4 sm:min-h-14 sm:gap-2 sm:px-8 sm:text-base';
 
 const rotatingRoles = ['a Full-Stack Web Developer', 'a Video Editor'];
 
@@ -50,9 +50,6 @@ export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedRole, setTypedRole] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const { scrollY } = useScroll();
-  const yTransform = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacityTransform = useTransform(scrollY, [0, 400], [1, 0.2]);
 
   useEffect(() => {
     const currentRole = rotatingRoles[roleIndex];
@@ -109,7 +106,6 @@ export default function Hero() {
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-7 sm:gap-10 lg:grid-cols-[1.12fr_0.88fr]">
         <motion.div
-          style={{ y: yTransform, opacity: opacityTransform }}
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -147,14 +143,14 @@ export default function Hero() {
           </motion.p>
 
           <motion.div 
-            className="mt-7 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:gap-4"
+            className="mt-7 flex flex-row gap-3 sm:mt-9 sm:gap-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
             <motion.a 
               href="#contact" 
-              className={`${buttonBase} bg-gradient-to-r from-purple-500 to-cyan-400 text-white shadow-[0_16px_36px_rgba(168,85,247,0.3)] hover:shadow-[0_20px_48px_rgba(168,85,247,0.4)] dark:from-cyan-400 dark:via-sky-400 dark:to-violet-400 dark:text-slate-950 dark:shadow-[0_18px_44px_rgba(14,165,233,0.25)] dark:hover:shadow-[0_24px_58px_rgba(45,212,191,0.28)]`}
+              className={`${buttonBase} flex-1 bg-gradient-to-r from-purple-500 to-cyan-400 text-white shadow-[0_16px_36px_rgba(168,85,247,0.3)] hover:shadow-[0_20px_48px_rgba(168,85,247,0.4)] sm:flex-none dark:from-cyan-400 dark:via-sky-400 dark:to-violet-400 dark:text-slate-950 dark:shadow-[0_18px_44px_rgba(14,165,233,0.25)] dark:hover:shadow-[0_24px_58px_rgba(45,212,191,0.28)]`}
               whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -162,7 +158,7 @@ export default function Hero() {
             </motion.a>
             <motion.a 
               href="#projects" 
-              className={`${buttonBase} border-2 border-purple-500 bg-white/50 text-slate-950 hover:bg-purple-500/20 dark:border-sky-300/70 dark:bg-slate-900/45 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] dark:hover:border-teal-200 dark:hover:bg-sky-300/10 dark:hover:text-teal-100`}
+              className={`${buttonBase} flex-1 border-2 border-purple-500 bg-white/50 text-slate-950 hover:bg-purple-500/20 sm:flex-none dark:border-sky-300/70 dark:bg-slate-900/45 dark:text-slate-100 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] dark:hover:border-teal-200 dark:hover:bg-sky-300/10 dark:hover:text-teal-100`}
               whileHover={{ scale: 1.05, y: -4 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -176,7 +172,6 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 0.9, delay: 0.2 }}
-          style={{ y: useTransform(scrollY, [0, 300], [0, 80]) }}
         >
           {/* Gradient Border Rectangle */}
           <motion.div
