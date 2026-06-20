@@ -19,7 +19,7 @@ export default function Skills() {
           className="overflow-hidden rounded-lg border border-indigo-200/80 bg-white/85 p-3 shadow-[0_20px_60px_rgba(8,145,178,0.16),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-2xl dark:!bg-[#0b1224]/80 dark:!bg-none dark:border-cyan-300/20 dark:shadow-[0_22px_80px_rgba(0,0,0,0.34),inset_0_1px_0_rgba(255,255,255,0.06)] sm:p-5"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true }} 
           transition={{ duration: 0.8 }}
         >
           <div className="mb-3 flex flex-col gap-3 border-b border-indigo-200/80 pb-4 dark:border-cyan-300/10 sm:mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pb-5">
