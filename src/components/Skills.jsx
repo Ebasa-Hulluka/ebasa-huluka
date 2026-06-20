@@ -11,7 +11,7 @@ export default function Skills() {
       id="skills"
       className="section-surface px-4 py-10 text-slate-950 dark:text-slate-100 sm:px-6 sm:py-24 lg:px-8"
     >
-      <AnimatedLineBackgroud colorScheme="cyan-purple" />
+      <AnimatedLineBackground colorScheme="cyan-purple" />
       <FloatingElements />
 
       <div className="relative mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
