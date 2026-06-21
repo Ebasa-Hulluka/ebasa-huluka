@@ -22,7 +22,7 @@ export default function Skills() {
           viewport={{ once: true }} 
           transition={{ duration: 0.8 }}
         >
-          <div className="mb-3 flex flex-col gap-3 border-b border-indigo-200/80 pb-4 dark:border-cyan-300/10 sm:mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pb-5">
+          <div className="mb-3 flex flex-co gap-3 border-b border-indigo-200/80 pb-4 dark:border-cyan-300/10 sm:mb-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:pb-5">
             <div className="flex items-center gap-3">
               <span className="grid h-10 w-10 place-items-center rounded-lg border border-cyan-200 bg-cyan-100/70 text-lg text-cyan-600 shadow-[0_0_28px_rgba(34,211,238,0.14)] dark:border-cyan-300/20 dark:bg-cyan-400/10 dark:text-cyan-300 sm:h-11 sm:w-11 sm:text-xl">
                 <FaCode />
